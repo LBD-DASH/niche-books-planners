@@ -1,0 +1,33 @@
+---
+import '../styles/global.css';
+import { withBase, absUrl, SITE_NAME } from '../lib/url';
+const { title, description, path = '' } = Astro.props;
+const full = title === SITE_NAME ? title : `${title} | ${SITE_NAME}`;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{full}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={absUrl(path, Astro.site)} />
+  <link rel="icon" href={withBase("favicon.svg")} />
+  <slot name="head" />
+</head>
+<body>
+  <header class="site"><div class="wrap">
+    <a class="brand" href={withBase('')}>{SITE_NAME}</a>
+    <nav>
+      <a href={withBase('titles/')}>Books and planners</a>
+      <a href={withBase('faq/')}>FAQ</a>
+      <a href={withBase('about/')}>About</a>
+    </nav>
+  </div></header>
+  <main><div class="wrap"><slot /></div></main>
+  <footer><div class="wrap">
+    <a href={withBase('privacy/')}>Privacy</a> · <a href={withBase('disclosure/')}>Disclosure</a> · <a href={withBase('about/')}>About</a>
+    <p>Nothing here is for sale yet. No prices, checkout or store links are live.</p>
+  </div></footer>
+</body>
+</html>

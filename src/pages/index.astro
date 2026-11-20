@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { withBase, SITE_NAME } from '../lib/url';
+const titles = (await getCollection('titles')).sort((a, b) => a.id.localeCompare(b.id));
+---
+<Base title={SITE_NAME} description="A small imprint making planners, journals, workbooks and well-researched niche guides. Every title is in development and not yet for sale.">
+  <h1>Planners, journals, workbooks and niche guides, made carefully</h1>
+  <p>Niche Books and Planners is a small publishing imprint. We are building practical printed and digital titles for specific readers, and we plan to sell them later through a store such as KDP or Gumroad. Nothing is on sale today.</p>
+  <h2>Our quality standard</h2>
+  <ul>
+    <li><strong>Researched.</strong> Guides cite their sources and carry a last checked date.</li>
+    <li><strong>Useful.</strong> Each title is designed around a task the reader actually has, then tested by using it.</li>
+    <li><strong>No filler.</strong> No padded pages, no unreviewed machine-written text, no recycled public-domain bulk.</li>
+    <li><strong>Honest.</strong> No invented reviews, ratings, sales figures or release dates.</li>
+  </ul>
+  <h2>Titles in development</h2>
+  <div class="grid">
+    {titles.map((t) => (
+      <a class="card" href={withBase(`titles/${t.id}/`)} style="text-decoration:none;color:inherit">
+        <span class="badge">In development</span>
+        <h3>{t.data.title}</h3>
+        <p class="meta">{t.data.format} · Price: {t.data.price}</p>
+        <p>{t.data.description}</p>
+      </a>
+    ))}
+  </div>
+  <p><a href={withBase('titles/')}>See all titles</a></p>
+</Base>

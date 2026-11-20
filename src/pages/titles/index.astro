@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { withBase } from '../../lib/url';
+const titles = (await getCollection('titles')).sort((a, b) => a.id.localeCompare(b.id));
+---
+<Base title="Books and planners" description="The planners, journals, workbooks and guides currently in development at Niche Books and Planners." path="titles/">
+  <h1>Books and planners</h1>
+  <p>Every title below is in development. None is for sale, and there are no prices or release dates yet.</p>
+  <div class="grid">
+    {titles.map((t) => (
+      <a class="card" href={withBase(`titles/${t.id}/`)} style="text-decoration:none;color:inherit">
+        <span class="badge">In development</span>
+        <h3>{t.data.title}</h3>
+        <p class="meta">{t.data.format}</p>
+        <p>{t.data.description}</p>
+      </a>
+    ))}
+  </div>
+</Base>

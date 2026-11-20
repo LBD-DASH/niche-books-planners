@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { CONTACT_EMAIL } from '../lib/url';
+---
+<Base title="About" description="About Niche Books and Planners, a small imprint of planners, journals, workbooks and researched niche guides." path="about/">
+  <h1>About</h1>
+  <p>Niche Books and Planners is a small publishing imprint. It is at an early stage: the titles are in development and nothing is for sale.</p>
+  <p>We make planners, journals, workbooks and niche guides. Our standard is researched, useful content with no low-quality filler.</p>
+  <h2>Enquiries</h2>
+  {CONTACT_EMAIL
+    ? <p>Questions or quote requests: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
+    : <p>A contact address has not been published yet. This site has no form and collects nothing.</p>}
+  <p>Pricing: Coming soon, or Request a quote.</p>
+</Base>

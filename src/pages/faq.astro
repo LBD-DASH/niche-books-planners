@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+const faq = [
+  { q: 'What does Niche Books and Planners make?', a: 'A small imprint of planners, journals, workbooks and researched niche guides.' },
+  { q: 'Can I buy a title now?', a: 'No. Every title is in development and nothing is for sale. There are no prices, checkout or store links yet.' },
+  { q: 'How much will titles cost?', a: 'Prices are not set. Pricing is shown as Coming soon, or Request a quote.' },
+  { q: 'Is the content written by AI?', a: 'Our standard is researched, useful content with no low-quality AI filler. Everything is reviewed and tested by a person before release.' },
+  { q: 'When will titles be released?', a: 'There are no release dates yet. We will not publish one until a title is finished.' },
+];
+const ld = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
+---
+<Base title="FAQ" description="Answers about the Niche Books and Planners imprint: what we make, availability, pricing and our quality standard." path="faq/">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(ld)} />
+  <h1>FAQ</h1>
+  {faq.map((f) => (<><h2>{f.q}</h2><p>{f.a}</p></>))}
+</Base>

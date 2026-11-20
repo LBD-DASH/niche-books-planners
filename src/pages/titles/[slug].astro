@@ -1,0 +1,25 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { withBase } from '../../lib/url';
+export async function getStaticPaths() {
+  const titles = await getCollection('titles');
+  return titles.map((t) => ({ params: { slug: t.id }, props: { t } }));
+}
+const { t } = Astro.props;
+const { Content } = await render(t);
+const d = t.data;
+---
+<Base title={d.title} description={d.description} path={`titles/${t.id}/`}>
+  <p><a href={withBase('titles/')}>All titles</a></p>
+  <span class="badge">In development</span>
+  <h1>{d.title}</h1>
+  <p class="meta">{d.format} · Price: {d.price} · Last updated {d.lastUpdated.toISOString().slice(0, 10)}</p>
+  <h2>Who it is for</h2>
+  <p>{d.audience}</p>
+  <h2>Planned contents</h2>
+  <ul>{d.contents.map((c) => <li>{c}</li>)}</ul>
+  <Content />
+  <h2>Availability</h2>
+  <p>Not for sale yet. There is no release date, price or store link. For a quote or to ask about this title, see the <a href={withBase('about/')}>About page</a>.</p>
+</Base>

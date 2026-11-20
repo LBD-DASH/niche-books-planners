@@ -1,0 +1,5 @@
+{
+  "_note": "Storefront entries. Leave url empty until Kevin approves a store and an account exists. Never invent links.",
+  "kdp": { "name": "Amazon KDP", "kind": "storefront", "url": "" },
+  "gumroad": { "name": "Gumroad", "kind": "storefront", "url": "" }
+}
